@@ -1,6 +1,6 @@
 # Gulp-сборка
 
-# 1. Устанавливаем gulpfile.js, package.json и .jshintrc
+# 1. Устанавливаем gulpfile.js и package.json
 
 # 2. Запускаем консоль и вводим: npm init, меняем название / Если нет Gulp - устанавливаме Node.js, потом вводим npm i -g gulp-cli 
 
