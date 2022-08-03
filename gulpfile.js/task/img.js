@@ -3,6 +3,7 @@ const imgMin = () => {
         .pipe($.gp.size({
             title: 'Before',
         }))
+        .pipe($.gp.if($.app.isProd, $.gulp.dest($.path.img.dest)))
         .pipe($.gp.newer($.path.img.destMin))
         .pipe($.gp.webp())
         .pipe($.gulp.dest($.path.img.destMin))

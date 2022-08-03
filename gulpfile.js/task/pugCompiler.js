@@ -1,8 +1,6 @@
 const pugCompiler = () => {
     return $.gulp.src($.path.pug.src)
-        .pipe($.gp.pug({
-            pretty: true,
-        }))
+        .pipe($.gp.pug({pretty: true}))
         .pipe($.gp.size({
             title: 'Before',
         }))
@@ -31,9 +29,9 @@ const pugCompiler = () => {
             }
           ]
         }))
-        .pipe($.gp.webpHtml())
         .pipe($.gp.if($.app.isDev, $.gulp.dest($.path.pug.destMin)))
-        .pipe($.gp.if($.app.isProd, $.gulp.dest($.path.pug.dest)))
+        .pipe($.gp.pug({pretty: false}))
+        .pipe($.webpHTML())
         .pipe($.gp.rename({
             suffix: '.min',
         }))

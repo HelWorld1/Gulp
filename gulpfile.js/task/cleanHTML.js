@@ -1,5 +1,5 @@
 const cleanHTML = () => {
-  return $.gulp.src($.path.pug.cleanhtml)
+  return $.gulp.src($.path.clean.html)
     .pipe($.gp.clean({force: true}))
 }
 

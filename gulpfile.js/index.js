@@ -9,6 +9,7 @@ global.$ = {
     sass: require('gulp-sass')(require('sass')),
     CssMediaQueries: require('gulp-group-css-media-queries'),
     svgSprite: require('gulp-svg-sprite'),
+    webpHTML: require('gulp-webp-html'),
 }
 const requireDir = require('require-dir');
 const tasks = requireDir('./task', $.app.recurse)
@@ -33,19 +34,29 @@ const watcher = () => {
     $.livereload.listen()
 }
 
+const font = $.gulp.series(
+  tasks.font,
+  tasks.ttf,
+  tasks.woff,
+  tasks.woff2,
+  tasks.eot,
+  tasks.cleanFONT,
+)
+
 const basic = $.gulp.series(
-  $.gulp.parallel($.gulp.parallel(tasks.sassCompiler,tasks.pugCompiler,tasks.js,tasks.font,tasks.svg, tasks.img))
+  $.gulp.parallel($.gulp.parallel(tasks.sassCompiler,tasks.pugCompiler,tasks.js,tasks.svg, tasks.img)),
+  font,
 )
 
 const dev = $.gulp.series(
-  basic,
-  server,
-  watcher,
+  $.gulp.parallel(basic,server,watcher)
 )
 
 const build = $.gulp.series(
   tasks.cleanHTML,
   basic,
+  tasks.destHTML,
+  tasks.destCSS,
   tasks.lint,
 )
 
@@ -57,6 +68,14 @@ exports.imgMin = tasks.img;
 exports.font = tasks.font;
 exports.svg = tasks.svg;
 exports.cleanHTML = tasks.cleanHTML;
+exports.html = tasks.destHTML;
+exports.css = tasks.destCSS;
+exports.ttf = tasks.ttf;
+exports.woff = tasks.woff;
+exports.woff2 = tasks.woff2;
+exports.eot = tasks.eot;
+exports.clean = tasks.cleanFONT;
+exports.cleanIMG = tasks.cleanIMG;
 
 exports.default = $.app.isProd
     ? build
