@@ -10,6 +10,8 @@ global.$ = {
     CssMediaQueries: require('gulp-group-css-media-queries'),
     svgSprite: require('gulp-svg-sprite'),
     webpHTML: require('gulp-webp-html'),
+    webpNoSVG: require('gulp-webp-html-nosvg'),
+    webpCSSFixed: require('gulp-webp-css-fixed'),
 }
 const requireDir = require('require-dir');
 const tasks = requireDir('./task', $.app.recurse)
@@ -44,7 +46,7 @@ const font = $.gulp.series(
 )
 
 const basic = $.gulp.series(
-  $.gulp.parallel($.gulp.parallel(tasks.sassCompiler,tasks.pugCompiler,tasks.js,tasks.svg, tasks.img)),
+  $.gulp.parallel($.gulp.parallel(tasks.sass,tasks.pug,tasks.js,tasks.svg, tasks.img)),
   font,
 )
 
@@ -60,8 +62,8 @@ const build = $.gulp.series(
   tasks.lint,
 )
 
-exports.sassCompiler = tasks.sassCompiler;
-exports.pugCompiler = tasks.pugCompiler;
+exports.sass = tasks.sass;
+exports.pug = tasks.pug;
 exports.lint = tasks.lint;
 exports.jsMin = tasks.js;
 exports.imgMin = tasks.img;

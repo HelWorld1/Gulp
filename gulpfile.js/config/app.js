@@ -6,10 +6,10 @@ module.exports = {
     isDev: isDev,
 
     htmlmin: {
-        collapseWhitespace: isProd,
-        removeComments: isProd,
-        removeAttributeQuotes: isProd,
-        removeEmptyAttributes: isProd,
+        collapseWhitespace: true,
+        removeComments: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
     },
 
     sassmin: {
