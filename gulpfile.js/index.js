@@ -27,8 +27,8 @@ const server = () => {
 
 const watcher = () => {
     exports.watch
-    $.gulp.watch($.path.sass.watch, tasks.sassCompiler).on('all', browserSync.reload);
-    $.gulp.watch($.path.pug.watch, tasks.pugCompiler).on('all', browserSync.reload);
+    $.gulp.watch($.path.sass.watch, tasks.sass).on('all', browserSync.reload);
+    $.gulp.watch($.path.pug.watch, tasks.pug).on('all', browserSync.reload);
     $.gulp.watch($.path.js.watch, tasks.js).on('all', browserSync.reload);
     $.gulp.watch($.path.img.watch, tasks.img).on('all', browserSync.reload);
     $.gulp.watch($.path.font.watch, tasks.font).on('all', browserSync.reload);
